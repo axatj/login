@@ -1,0 +1,43 @@
+<div class="header">
+  <h3 style="text-align: center" class="pb-3">Login Form</h3>
+  <form [formGroup]="loginForm" (submit)="onLogin()">
+    <div class="pb-2">
+      <label class="pb-2"> username : </label>
+      <input class="form-control" type="text" id="username" formControlName="email" />
+      <div *ngIf="
+          loginForm.controls['email'].invalid &&
+          (loginForm.controls['email'].dirty ||
+            loginForm.controls['email'].touched)
+        " class="form-text text-danger">
+        <div *ngIf="loginForm.controls['email'].errors?.['required']">
+          Username is required
+        </div>
+      </div>
+    </div>
+    <div class="pb-2">
+      <label class="pb-2"> password : </label>
+      <input class="form-control" type="password" id="password" formControlName="password" />
+
+      <div *ngIf="
+          loginForm.controls['password'].invalid &&
+          (loginForm.controls['password'].dirty ||
+            loginForm.controls['password'].touched)
+        " class="form-text text-danger">
+        <div *ngIf="loginForm.controls['password'].errors?.['required']">
+          Password is required
+        </div>
+        <div *ngIf="loginForm.controls['password'].errors?.['pattern']">
+          Password must contain at least one number, one uppercase and a
+          lowercase letter and at least 8 characters<br />Password cannot
+          contain whitespace
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center" class="pt-4">
+      <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
